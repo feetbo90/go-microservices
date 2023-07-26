@@ -1,0 +1,20 @@
+version: '3'
+
+# NOTE: for all of the images for the 5 microservices, you'll
+# have to change the image: <name> part to whatever your image names are
+
+services:
+  postgres:
+    image: 'postgres:14.2'
+    ports:
+      - "5432:5432"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: users
+    volumes:
+      - ./db-data/postgres/:/var/lib/postgresql/data/
